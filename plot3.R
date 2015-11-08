@@ -45,15 +45,16 @@ createPNG <- function (filename, dat, plotfunc) {
 ## buildPlot3: build plot3 on the screen device
 # dat: the data table to build the plot from
 buildPlot3 <- function(dat) {
-  x <- dat$Time
-  y <- dat$Sub_metering_1
   par(mar = c(2, 4, 2, 2))
   Sys.setlocale("LC_TIME", "en_US.UTF-8")
-  plot(x , y, ylab = "Energy sub metering", type="l")
-  points(x, dat$Sub_metering_2, col = "red", type = "l")
-  points(x, dat$Sub_metering_3, col = "blue", type = "l")
-  legend("topright", col = c("black", "red", "blue"), 
-         legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lwd = 1)
+  
+  with(dat, {
+    plot(Time , Sub_metering_1, ylab = "Energy sub metering", type="l")
+    points(Time, Sub_metering_2, col = "red", type = "l")
+    points(Time, Sub_metering_3, col = "blue", type = "l")
+    legend("topright", col = c("black", "red", "blue"), 
+           legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lwd = 1)
+  })
 }
 
 ## makePlot3: make everything to create the PNG image for plot3
